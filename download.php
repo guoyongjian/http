@@ -58,14 +58,18 @@ class file{
         $this->request();
     }
 
-    public function post(){
-
+    public function post($arr = array()){
+        $this->setLine('POST');
+        $this->body = array_merge($this->body,$arr);
+        $this->setHeader('Content-type:application/x-www-form-urlencoded');
+        $this->setHeader('Content-length:'. strlen(http_build_query($this->body)));
+        $this->request();
     }
 
     public function request(){
-        $req = array_merge($this->line,$this->header,array(''),$this->body,array(''));
+        $req = array_merge($this->line,$this->header,array(''),array(http_build_query($this->body)),array(''));
         $str = implode(PHP_EOL,$req);
-
+//        echo $str;exit;
         fwrite($this->fh,$str);
         while(!feof($this->fh)){
             $this->response .= fread($this->fh,1024);
@@ -80,4 +84,5 @@ class file{
 
 $obj = new file("http://localhost/telnet.php");
 //$obj = new file("http://www.itbool.com/";);
-$obj->get();
+//$obj->get();
+$obj->post(array('name'=>"tom's father"));
