@@ -75,10 +75,11 @@ class file{
             $this->response .= fread($this->fh,1024);
            }
         echo $this->response;
+        $this->close();//关闭资源句柄
     }
 
     public function close(){
-
+        fclose($this->fh);
     }
 }
 
