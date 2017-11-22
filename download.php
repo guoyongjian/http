@@ -1,4 +1,5 @@
 <?php
+/**
 * User: 郭永健
 * Date: 2017/11/19
 * Time: 22:59
@@ -63,7 +64,7 @@ public function post(){
 
 public function request(){
     $req = array_merge($this->line,$this->header,array(''),$this->body,array(''));
-    $str = implode("\r\n",$req);
+    $str = implode(PHP_EOL,$req);
 
     fwrite($this->fh,$str);
     while(!feof($this->fh)){
@@ -77,6 +78,6 @@ public function close(){
 }
 }
 
-$obj = new file("http://localhost/http/ceshi.php";);
+$obj = new file("http://localhost/telnet.php");
 //$obj = new file("http://www.itbool.com/";);
 $obj->get();
