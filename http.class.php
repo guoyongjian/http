@@ -83,7 +83,7 @@ class file{
     }
 }
 
-$obj = new file("http://localhost/telnet.php");
-//$obj = new file("http://www.itbool.com/";);
-//$obj->get();
-$obj->post(array('name'=>"tom's father"));
+//$obj = new file("http://localhost/telnet.php");
+////$obj = new file("http://www.itbool.com/";);
+////$obj->get();
+//$obj->post(array('name'=>"tom's father"));
