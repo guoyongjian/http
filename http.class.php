@@ -5,7 +5,7 @@
 * Time: 22:59
 */
 
-class file{
+class http{
     public $urlInfo = array();
     public $line=array();
     public $header=array();
@@ -24,7 +24,8 @@ class file{
     *设置行信息
     */
     public function setLine($method){
-        $this->line[0] = $method .' '.$this->urlInfo['path'] . ' HTTP/1.1';
+        $this->line[0] = $method .' '.$this->urlInfo['path'] . '?' . $this->urlInfo['query'] . ' HTTP/1.1';
+//        print_r($this->line);exit;
     }
 
     /**
@@ -46,6 +47,7 @@ class file{
     */
     public function conn($url){
         $this->urlInfo = parse_url($url);
+//        print_r($this->urlInfo);exit;
         $this->urlInfo['port'] = isset($this->urlInfo['port'])?:80;
         $this->fh = fsockopen($this->urlInfo['host'],$this->urlInfo['port'],$this->errno,$this->error,3);
     }
