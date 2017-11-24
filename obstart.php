@@ -13,13 +13,24 @@ $pad = str_repeat(' ',4000);
 echo $pad,'<br/>';
 ob_flush();
 flush();
-
+$link = new mysqli('localhost','root','root','mysqli');
+$link->set_charset('utf8');
 $a = 1;
 while($a++){
-    echo $pad,'<br/>';
-    echo $a,'<br/>';
+    $sql = 'select * from admin where is_read=0';
+    $query = $link->query($sql);
+    $data = $query->fetch_all(MYSQLI_ASSOC);
+    $name = array_column($data,'name');
+    $id = array_column($data,'id');
+//    print_r($id);exit;
+    foreach ($name as $v){
+        echo $v,'<br/>';
+    }
+    print_r($id);
+//    $sql = 'update admin set is_read=1 where id in (' . implode(",",$id) .')';
+    $link->query($sql);
     ob_flush();
     flush();
-    sleep(1);
+    sleep(2);
 }
 
